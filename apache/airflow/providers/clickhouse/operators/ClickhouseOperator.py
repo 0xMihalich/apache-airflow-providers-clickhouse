@@ -6,7 +6,7 @@ ClicHouseOperator provide Airflow operator execute query on Clickhouse instance
 from typing import Iterable, List, Mapping, Optional, Union
 
 from airflow.models import BaseOperator
-from pandas import pandas
+from pandas import DataFrame
 
 from apache.airflow.providers.clickhouse.hooks.ClickhouseHook import ClickhouseHook
 
@@ -46,7 +46,7 @@ class ClickhouseOperator(BaseOperator):
         self.log.info('Load client: %s', client)
         rows, col_definitions = client.run(sql=self.sql, parameters=self.parameters, with_column_types=True)
         columns = [column_name for column_name, _ in col_definitions]
-        data = pandas.DataFrame(rows, columns=columns).to_json(orient='records')
+        data = DataFrame(rows, columns=columns).to_json(orient='records')
         if self.do_xcom_push:
             self.xcom_push(context,"query_result", data)
         return

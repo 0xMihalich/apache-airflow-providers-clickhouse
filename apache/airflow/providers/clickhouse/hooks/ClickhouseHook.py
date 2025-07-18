@@ -2,7 +2,10 @@ from typing import Dict, Any, Iterable, Union
 
 from airflow.hooks.dbapi import DbApiHook
 from airflow.models.connection import Connection
-from clickhouse_driver import Client
+from clickhouse_driver.dbapi.connection import (
+    Connection as ChConnection,
+    Cursor,
+)
 
 
 class ClickhouseHook(DbApiHook):
@@ -31,7 +34,7 @@ class ClickhouseHook(DbApiHook):
             "relabeling":    {'schema': 'Database'},
         }
 
-    def get_conn(self, conn_name_attr: str = None) -> Client:
+    def get_conn(self, conn_name_attr: str = None) -> ChConnection:
 
         if conn_name_attr:
             self.conn_name_attr = conn_name_attr
@@ -50,9 +53,7 @@ class ClickhouseHook(DbApiHook):
         if database:
             click_kwargs.update(database=database)
 
-        result = Client(host or 'localhost', **click_kwargs)
-        result.connection.connect()
-        return result
+        return ChConnection(host=host or 'localhost', **click_kwargs)
 
     def run(self, sql: Union[str, Iterable[str]], parameters: dict = None,
             with_column_types: bool = True, **kwargs) -> Any:
@@ -60,15 +61,17 @@ class ClickhouseHook(DbApiHook):
         if isinstance(sql, str):
             queries = (sql,)
         client = self.get_conn()
+        cursor: Cursor = client.cursor()
         result = None
         index = 0
         for query in queries:
             index += 1
             self.log.info("Query_%s  to database : %s", index, query)
-            result = client.execute(
+            result = cursor.execute(
                 query=query,
                 #  params=parameters,
                 with_column_types=with_column_types,
             )
             self.log.info("Query_%s completed", index)
+        client.close()
         return result
