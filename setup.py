@@ -1,14 +1,14 @@
 ﻿from setuptools import setup
 
-with open("README.md", "r") as fh:
+with open("README.md") as fh:
     long_description = fh.read()
 
 setup(
-    name="airflow-providers-clickhouse",
+    name="airflow-providers-clickhouse-fork",
     version="0.0.3",
-    url="https://github.com/klimenkoIv/apache-airflow-providers-clickhouse",
+    url="https://github.com/0xMihalich/apache-airflow-providers-clickhouse",
     project_urls={
-        "Bug Tracker": "https://github.com/klimenkoIv/apache-airflow-providers-clickhouse/issues",
+        "Bug Tracker": "https://github.com/0xMihalich/apache-airflow-providers-clickhouse/issues",
     },
     license="Apache License 2.0",
     classifiers=[
@@ -22,8 +22,8 @@ setup(
     long_description_content_type="text/markdown",
     entry_points={
         "apache_airflow_provider": [
-            "provider_info=apache.__init__:get_provider_info"
-        ]
+            "provider_info=apache.__init__:get_provider_info",
+        ],
     },
     packages=[
         "apache",

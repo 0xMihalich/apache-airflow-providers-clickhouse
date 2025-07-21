@@ -17,7 +17,7 @@ class ClickhouseOperator(BaseOperator):
 
     parameters = {
         "use_numpy": False,
-        "client_name": "airflow-providers-clickhouse",
+        "client_name": "airflow-providers-clickhouse-fork",
         "strings_encoding": "utf-8",
         "strings_as_bytes": True,
     }

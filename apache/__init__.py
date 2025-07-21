@@ -1,6 +1,6 @@
 def get_provider_info():
     return {
-        "package-name": "airflow-providers-clickhouse",
+        "package-name": "airflow-providers-clickhouse-fork",
         "name": "Clickhouse",
         "description": "Clickhouse provider for Airflow",
         "versions": ["0.0.1"],
@@ -12,7 +12,7 @@ def get_provider_info():
         "integrations": [
             {
                 "integration-name": "Clickhouse",
-                "external-doc-url": "https://github.com/klimenkoIv/apache-airflow-providers-clickhouse",
+                "external-doc-url": "https://github.com/0xMihalich/apache-airflow-providers-clickhouse",
                 "tags": ["service", "clickhouse", "database", "airflow"],
             },
         ],
