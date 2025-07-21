@@ -80,9 +80,8 @@ class ClickhouseHook(DbApiHook):
             self.log.info("Query_%s  to database : %s", index, query)
             result = cursor.execute(
                 query=query,
-                #  params=parameters,
+                params=parameters,
                 with_column_types=with_column_types,
             )
             self.log.info("Query_%s completed", index)
-        client.close()
         return result
