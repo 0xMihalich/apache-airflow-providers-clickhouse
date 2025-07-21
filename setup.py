@@ -22,7 +22,7 @@ setup(
     long_description_content_type="text/markdown",
     entry_points={
         "apache_airflow_provider": [
-            "provider_info=apache.__init__:get_provider_info"
+            "provider_info=apache.airflow.providers.clickhouse.__init__:get_provider_info"
         ]
     },
     packages=[
