@@ -1,10 +1,14 @@
 
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
-from apache.airflow.providers.clickhouse.operators.ClickhouseOperator import ClickhouseOperator
+from apache.airflow.providers.clickhouse.operators.ClickhouseOperator import ClickhouseOperator  # noqa: E501
+
 
 with DAG(
     dag_id='example_clickhouse_operator',

@@ -5,7 +5,7 @@ Provider allow connection from Apache Airflow to Yandex Clickhouse Database and 
 ## Installation
 
 ```shell
-pip install airflow-providers-clickhouse
+pip install apache-airflow-providers-clickhouse
 ```
 
 ## Using
